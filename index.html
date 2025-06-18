@@ -12,7 +12,7 @@
             background-color: #f4f4f4;
             color: #333;
         }
-      .container {
+       .container {
             max-width: 1200px;
             margin: 0 auto;
             background-color: #fff;
@@ -25,14 +25,14 @@
             text-align: center;
             margin-bottom: 30px;
         }
-      .intro-text {
+       .intro-text {
             margin-bottom: 30px;
             line-height: 1.6;
             text-align: center;
             font-size: 1.1em;
             color: #555;
         }
-      .table-container {
+       .table-container {
             overflow-x: auto;
             margin-top: 20px;
             border: 1px solid #ddd;
@@ -61,13 +61,20 @@
         tr:hover {
             background-color: #f1f1f1;
         }
-      .cost-info {
+       .cost-info {
             font-size: 0.9em;
             color: #666;
         }
-      .citation {
+       .citation {
             font-size: 0.8em;
             color: #888;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
 
         /* Mobile responsiveness */
@@ -75,13 +82,13 @@
             body {
                 padding: 10px;
             }
-          .container {
+           .container {
                 padding: 15px;
             }
             h1 {
                 font-size: 1.8em;
             }
-          .intro-text {
+           .intro-text {
                 font-size: 1em;
             }
             table {
@@ -102,18 +109,21 @@
                 box-shadow: 0 1px 5px rgba(0,0,0,0.05);
             }
             td {
-                text-align: right;
-                padding-left: 50%;
+                text-align: left; /* Align content to the left */
+                padding-left: 15px; /* Reset padding for the content */
                 position: relative;
+                padding-top: 30px; /* Add space for the label above the content */
+                padding-bottom: 10px; /* Add some bottom padding */
             }
             td::before {
                 content: attr(data-label);
                 position: absolute;
+                top: 8px; /* Position label above the content */
                 left: 15px;
-                width: calc(50% - 30px);
-                text-align: left;
                 font-weight: bold;
                 color: #2c3e50;
+                width: auto; /* Let content determine width */
+                text-align: left;
             }
             td:last-child {
                 border-bottom: 0;
