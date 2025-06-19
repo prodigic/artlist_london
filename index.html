@@ -13,7 +13,7 @@
             color: #333;
             line-height: 1.6;
         }
-      .container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             background-color: #fff;
@@ -27,19 +27,19 @@
             margin-bottom: 30px;
             font-size: 2.2em;
         }
-      .intro-text {
+        .intro-text {
             margin-bottom: 30px;
             text-align: center;
             font-size: 1.1em;
             color: #555;
         }
-      .exhibition-cards {
+        .exhibition-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
-      .exhibition-card {
+        .exhibition-card {
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -49,58 +49,99 @@
             justify-content: space-between;
             transition: transform 0.2s ease-in-out;
         }
-      .exhibition-card:hover {
+        .exhibition-card:hover {
             transform: translateY(-5px);
         }
-      .exhibition-card h3 {
+        .card-header {
+            margin-bottom: 15px;
+            /* Removed padding/margin that might cause the gap */
+        }
+        .card-header h3 {
             color: #007bff;
-            margin-top: 0;
-            margin-bottom: 10px;
+            margin-top: 10px; /* Adjusted for space below address */
+            margin-bottom: 5px;
             font-size: 1.4em;
             line-height: 1.3;
         }
-      .exhibition-card h3 a {
+        .card-header h3 a {
             text-decoration: none;
             color: #007bff;
         }
-      .exhibition-card h3 a:hover {
+        .card-header h3 a:hover {
             text-decoration: underline;
         }
-      .exhibition-card.gallery-name {
+        .gallery-info, .gallery-address {
+            padding: 5px 10px;
+            margin-bottom: 0; /* Removed margin-bottom to close gap */
+            border-radius: 4px;
+            background-color: #e0f2f7; /* Light blue background */
             font-size: 1em;
-            color: #666;
-            margin-bottom: 15px;
+            color: #2a6496; /* Darker blue text for contrast */
         }
-      .exhibition-card.gallery-name a {
+        .gallery-info {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        .gallery-info a {
             text-decoration: none;
-            color: #666;
+            color: #2a6496;
         }
-      .exhibition-card.gallery-name a:hover {
+        .gallery-info a:hover {
             text-decoration: underline;
         }
-      .exhibition-card.summary {
+        .gallery-address {
+            font-size: 0.9em;
+            color: #337ab7; /* Slightly lighter blue for address */
+            margin-top: 0; /* Removed margin-top to close gap */
+        }
+        .summary {
             font-size: 0.95em;
             color: #444;
-            margin-bottom: 20px;
-            flex-grow: 1; /* Allows summary to take up available space */
+            margin-top: 10px; /* Space above summary */
+            margin-bottom: 5px; /* Closer to read-more-toggle */
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            line-height: 1.5em; /* Adjust based on font-size for consistent line height */
+            max-height: 7.5em; /* Approx 5 lines (1.5em * 5) */
+            transition: max-height 0.3s ease-out;
         }
-      .exhibition-card.details p {
+        .summary.expanded {
+            max-height: none; /* No max height when expanded */
+        }
+        .read-more-toggle {
+            display: block;
+            margin-top: 0px; /* Closer to text above */
+            margin-bottom: 15px; /* More space below */
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .exhibition-card .details p {
             margin: 5px 0;
             font-size: 0.9em;
             color: #555;
         }
-      .exhibition-card.details strong {
+        .exhibition-card .details strong {
             color: #333;
         }
-      .citation {
-            font-size: 0.8em;
-            color: #888;
-        }
-      .favicon {
+        .favicon {
             width: 16px;
             height: 16px;
             margin-right: 5px;
             vertical-align: middle;
+            border-radius: 2px;
+        }
+        .blank-favicon {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 2px;
+            background-color: #cccccc; /* Grey background for blank favicon */
         }
 
         /* Mobile responsiveness adjustments */
@@ -108,28 +149,34 @@
             body {
                 padding: 15px;
             }
-          .container {
+            .container {
                 padding: 15px;
             }
             h1 {
                 font-size: 1.6em;
             }
-          .intro-text {
+            .intro-text {
                 font-size: 0.95em;
             }
-          .exhibition-cards {
-                grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+            .exhibition-cards {
+                grid-template-columns: 1fr;
             }
-          .exhibition-card {
+            .exhibition-card {
                 padding: 20px;
             }
-          .exhibition-card h3 {
+            .card-header h3 {
                 font-size: 1.2em;
             }
-          .exhibition-card.summary {
+            .gallery-info {
+                font-size: 0.95em;
+            }
+            .gallery-address {
+                font-size: 0.85em;
+            }
+            .exhibition-card .summary {
                 font-size: 0.9em;
             }
-          .exhibition-card.details p {
+            .exhibition-card .details p {
                 font-size: 0.85em;
             }
         }
@@ -147,31 +194,52 @@
         <div class="exhibition-cards">
 
             <div class="exhibition-card">
-                <h3><a href="https://www.whitechapelgallery.org/about/press/hamad-butt-apprehensions/" target="_blank">Hamad Butt: Apprehensions & An Archive</a></h3>
-                <p class="gallery-name"><img src="https://www.whitechapelgallery.org/favicon.ico" alt="Whitechapel Gallery Favicon" class="favicon"><a href="https://www.whitechapelgallery.org/exhibitions/" target="_blank">Whitechapel Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.whitechapelgallery.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Whitechapel Gallery Favicon" class="favicon">
+                        <a href="https://www.whitechapelgallery.org/exhibitions/" target="_blank">Whitechapel Gallery</a>
+                    </p>
+                    <p class="gallery-address">77-82 Whitechapel High St, London E1 7QX</p>
+                    <h3><a href="https://www.whitechapelgallery.org/about/press/hamad-butt-apprehensions/" target="_blank">Hamad Butt: Apprehensions & An Archive</a></h3>
+                </div>
                 <p class="summary">This exhibition marks the first major survey of Hamad Butt, an artist recognized for his pioneering sculptural installations. It brings together iconic installations, previously unseen paintings and drawings, and archival material, exploring themes of danger, faith, and the precarious state of the world. [1]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 4 June - 7 September 2025</p>
                     <p><strong>Cost:</strong> Ticketed (Price not specified) [2]</p>
-                    <p><strong>Nearest Station(s):</strong> Not specified in provided text</p>
+                    <p><strong>Nearest Station(s):</strong> Unknown</p>
                 </div>
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.whitechapelgallery.org/exhibitions/london-open-live/" target="_blank">The London Open Live</a></h3>
-                <p class="gallery-name"><img src="https://www.whitechapelgallery.org/favicon.ico" alt="Whitechapel Gallery Favicon" class="favicon"><a href="https://www.whitechapelgallery.org/exhibitions/" target="_blank">Whitechapel Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.whitechapelgallery.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Whitechapel Gallery Favicon" class="favicon">
+                        <a href="https://www.whitechapelgallery.org/exhibitions/" target="_blank">Whitechapel Gallery</a>
+                    </p>
+                    <p class="gallery-address">77-82 Whitechapel High St, London E1 7QX</p>
+                    <h3><a href="https://www.whitechapelgallery.org/exhibitions/london-open-live/" target="_blank">The London Open Live</a></h3>
+                </div>
                 <p class="summary">As a triennial event, The London Open Live for 2025 focuses specifically on live art, inviting artists to submit proposals for performances engaging with the theme of 'London Open Live,' exploring contemporary urban existence and openness. It showcases artists from different generations with broad responses to liveness. [3]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 4 June - 7 September 2025</p>
                     <p><strong>Cost:</strong> Free [4]</p>
-                    <p><strong>Nearest Station(s):</strong> Not specified in provided text</p>
+                    <p><strong>Nearest Station(s):</strong> Unknown</p>
                 </div>
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.tate.org.uk/whats-on/tate-modern/anthony-mccall" target="_blank">Anthony McCall: Solid Light</a></h3>
-                <p class="gallery-name"><img src="https://www.tate.org.uk/favicon.ico" alt="Tate Modern Favicon" class="favicon"><a href="https://www.tate.org.uk/visit/tate-modern" target="_blank">Tate Modern</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.tate.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Tate Modern Favicon" class="favicon">
+                        <a href="https://www.tate.org.uk/visit/tate-modern" target="_blank">Tate Modern</a>
+                    </p>
+                    <p class="gallery-address">Bankside, London SE1 9TG</p>
+                    <h3><a href="https://www.tate.org.uk/whats-on/tate-modern/anthony-mccall" target="_blank">Anthony McCall: Solid Light</a></h3>
+                </div>
                 <p class="summary">This exhibition offers an immersive experience, inviting visitors to literally 'step inside sculptures of light'. Anthony McCall is a seminal figure in minimalist and conceptual art, celebrated for his 'solid light' installations that transform projected light and haze into tangible, three-dimensional forms, blurring boundaries between cinema, sculpture, and drawing. [5]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> Until 29 June 2025</p>
                     <p><strong>Cost:</strong> £14 (Free for Members, £5 for Tate Collective) [6, 7]</p>
@@ -180,9 +248,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.tate.org.uk/press/press-releases/leigh-bowery-27-february--31-august-2025" target="_blank">Leigh Bowery!</a></h3>
-                <p class="gallery-name"><img src="https://www.tate.org.uk/favicon.ico" alt="Tate Modern Favicon" class="favicon"><a href="https://www.tate.org.uk/visit/tate-modern" target="_blank">Tate Modern</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.tate.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Tate Modern Favicon" class="favicon">
+                        <a href="https://www.tate.org.uk/visit/tate-modern" target="_blank">Tate Modern</a>
+                    </p>
+                    <p class="gallery-address">Bankside, London SE1 9TG</p>
+                    <h3><a href="https://www.tate.org.uk/press/press-releases/leigh-bowery-27-february--31-august-2025" target="_blank">Leigh Bowery!</a></h3>
+                </div>
                 <p class="summary">This exhibition serves as a vibrant celebration of the 'eclectic and boundary-pushing' artist Leigh Bowery, tracing his profound influence on fashion and performance from the dynamic London club scene of the 1980s. It brings together his outlandish costumes, paintings, photography, and video to explore how he changed art, fashion, and popular culture forever. [8]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> Until 31 August 2025</p>
                     <p><strong>Cost:</strong> General exhibition entry (Free for Members, £5 for Tate Collective) [7]</p>
@@ -191,9 +266,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.tate.org.uk/whats-on/tate-modern/the-genesis-exhibition-do-ho-suh/exhibition-guide" target="_blank">The Genesis Exhibition: Do Ho Suh: Walk the House</a></h3>
-                <p class="gallery-name"><img src="https://www.tate.org.uk/favicon.ico" alt="Tate Modern Favicon" class="favicon"><a href="https://www.tate.org.uk/visit/tate-modern" target="_blank">Tate Modern</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.tate.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Tate Modern Favicon" class="favicon">
+                        <a href="https://www.tate.org.uk/whats-on/tate-modern/the-genesis-exhibition-do-ho-suh/exhibition-guide" target="_blank">Tate Modern</a>
+                    </p>
+                    <p class="gallery-address">Bankside, London SE1 9TG</p>
+                    <h3><a href="https://www.tate.org.uk/whats-on/tate-modern/the-genesis-exhibition-do-ho-suh/exhibition-guide" target="_blank">The Genesis Exhibition: Do Ho Suh: Walk the House</a></h3>
+                </div>
                 <p class="summary">This exhibition offers an immersive journey into the work of Korean-born, London-based artist Do Ho Suh, renowned for his intricate fabric installations and profound explorations of belonging and architecture. It surveys three decades of his practice across Seoul, New York, and London, exploring how memory amalgamates in spaces and how 'home' evolves. [9]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> Until 19 October 2025</p>
                     <p><strong>Cost:</strong> General exhibition entry (Free for Members, £5 for Tate Collective) [7]</p>
@@ -202,31 +284,52 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.tate.org.uk/whats-on/tate-britain/ed-atkins" target="_blank">Ed Atkins</a></h3>
-                <p class="gallery-name"><img src="https://www.tate.org.uk/favicon.ico" alt="Tate Britain Favicon" class="favicon"><a href="https://www.tate.org.uk/whats-on/tate-britain" target="_blank">Tate Britain</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.tate.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Tate Britain Favicon" class="favicon">
+                        <a href="https://www.tate.org.uk/whats-on/tate-britain" target="_blank">Tate Britain</a>
+                    </p>
+                    <p class="gallery-address">Millbank, London SW1P 4RG</p>
+                    <h3><a href="https://www.tate.org.uk/whats-on/tate-britain/ed-atkins" target="_blank">Ed Atkins</a></h3>
+                </div>
                 <p class="summary">This comprehensive exhibition features the pioneering videos and animations of Ed Atkins, alongside a broader selection of his paintings, embroideries, and drawings. Atkins is recognized as one of the most influential British artists working today, repurposing contemporary technologies to explore themes of intimacy, love, and loss. [10]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 2 April - 25 August 2025</p>
                     <p><strong>Cost:</strong> £18 (Free for Members, £5 for Tate Collective) [11]</p>
-                    <p><strong>Nearest Station(s):</strong> Pimlico [12]</p>
+                    <p><strong>Nearest Station(s):</strong> Pimlico (Victoria) [12]</p>
                 </div>
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.tate.org.uk/whats-on/tate-britain/burra-and-colquhoun" target="_blank">Edward Burra – Ithell Colquhoun</a></h3>
-                <p class="gallery-name"><img src="https://www.tate.org.uk/favicon.ico" alt="Tate Britain Favicon" class="favicon"><a href="https://www.tate.org.uk/whats-on/tate-britain" target="_blank">Tate Britain</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.tate.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Tate Britain Favicon" class="favicon">
+                        <a href="https://www.tate.org.uk/whats-on/tate-britain" target="_blank">Tate Britain</a>
+                    </p>
+                    <p class="gallery-address">Millbank, London SW1P 4RG</p>
+                    <h3><a href="https://www.tate.org.uk/whats-on/tate-britain/burra-and-colquhoun" target="_blank">Edward Burra – Ithell Colquhoun</a></h3>
+                </div>
                 <p class="summary">This presentation features parallel solo exhibitions offering unique insights into the distinct surrealist journeys of Edward Burra and Ithell Colquhoun. Burra is known for his vibrant, satirical scenes of urban underworlds, while Colquhoun explores surrealist methods and a fascination with the occult, tracing her evolution through over 140 artworks and archival materials. [13]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 13 June - 19 October 2025</p>
                     <p><strong>Cost:</strong> One ticket for both (Price not specified, General Tate pricing applies) [12, 11]</p>
-                    <p><strong>Nearest Station(s):</strong> Pimlico [12]</p>
+                    <p><strong>Nearest Station(s):</strong> Pimlico (Victoria) [12]</p>
                 </div>
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.saatchigallery.com/exhibition/rhs-botanical-art-photography-show-2025" target="_blank">RHS Botanical Art & Photography Show 2025</a></h3>
-                <p class="gallery-name"><img src="https://www.saatchigallery.com/favicon.ico" alt="Saatchi Gallery Favicon" class="favicon"><a href="https://www.saatchigallery.com/" target="_blank">Saatchi Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.saatchigallery.com/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Saatchi Gallery Favicon" class="favicon">
+                        <a href="https://www.saatchigallery.com/" target="_blank">Saatchi Gallery</a>
+                    </p>
+                    <p class="gallery-address">Duke of York's HQ, King's Rd, London SW3 4RY</p>
+                    <h3><a href="https://www.saatchigallery.com/exhibition/rhs-botanical-art-photography-show-2025" target="_blank">RHS Botanical Art & Photography Show 2025</a></h3>
+                </div>
                 <p class="summary">This annual show features botanical art and photography from around the world, showcasing a rich variety of subjects including Japanese cherry blossom and plants used in traditional cosmetics. A common theme is plants relied on by humans, with all art meticulously reviewed by an expert judging panel. [14, 15]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 13 June - 27 July 2025</p>
                     <p><strong>Cost:</strong> Free (suggested donation £5) [14]</p>
@@ -235,9 +338,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.serpentinegalleries.org/whats-on/serpentine-pavilion-2025-by-marina-tabassum/" target="_blank">Serpentine Pavilion 2025 by Marina Tabassum</a></h3>
-                <p class="gallery-name"><img src="https://www.serpentinegalleries.org/favicon.ico" alt="Serpentine Galleries Favicon" class="favicon"><a href="https://www.serpentinegalleries.org/" target="_blank">Serpentine Galleries</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.serpentinegalleries.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Serpentine Galleries Favicon" class="favicon">
+                        <a href="https://www.serpentinegalleries.org/" target="_blank">Serpentine Galleries</a>
+                    </p>
+                    <p class="gallery-address">Kensington Gardens, London W2 3XA</p>
+                    <h3><a href="https://www.serpentinegalleries.org/whats-on/serpentine-pavilion-2025-by-marina-tabassum/" target="_blank">Serpentine Pavilion 2025 by Marina Tabassum</a></h3>
+                </div>
                 <p class="summary">Titled 'A Capsule in Time,' this architectural installation takes inspiration from the ephemeral nature of architecture in the Bengal Delta. Designed by Marina Tabassum, it features an elongated, semi-transparent wooden structure with a central courtyard, exploring the interplay of light and shadow and evoking a sense of community. [17]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 6 June - 26 October 2025</p>
                     <p><strong>Cost:</strong> Free [18]</p>
@@ -246,9 +356,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.serpentinegalleries.org/whats-on/arpita-singh-remembering/" target="_blank">Arpita Singh: Remembering</a></h3>
-                <p class="gallery-name"><img src="https://www.serpentinegalleries.org/favicon.ico" alt="Serpentine Galleries Favicon" class="favicon"><a href="https://www.serpentinegalleries.org/" target="_blank">Serpentine Galleries</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.serpentinegalleries.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Serpentine Galleries Favicon" class="favicon">
+                        <a href="https://www.serpentinegalleries.org/" target="_blank">Serpentine Galleries</a>
+                    </p>
+                    <p class="gallery-address">Kensington Gardens, London W2 3XA</p>
+                    <h3><a href="https://www.serpentinegalleries.org/whats-on/arpita-singh-remembering/" target="_blank">Arpita Singh: Remembering</a></h3>
+                </div>
                 <p class="summary">This is the first solo institutional exhibition of Arpita Singh outside India, featuring key works selected in collaboration with the artist from her prolific career spanning over six decades. Singh's paintings center on her emotional and psychological state, drawing from Bengali folk art and Indian stories, interwoven with experiences of social upheaval and global conflict. [20]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 20 March - 27 July 2025</p>
                     <p><strong>Cost:</strong> Not specified [21]</p>
@@ -257,9 +374,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.serpentinegalleries.org/whats-on/giuseppe-penone-thoughts-in-the-roots/" target="_blank">Giuseppe Penone: Thoughts in the Roots</a></h3>
-                <p class="gallery-name"><img src="https://www.serpentinegalleries.org/favicon.ico" alt="Serpentine Galleries Favicon" class="favicon"><a href="https://www.serpentinegalleries.org/" target="_blank">Serpentine Galleries</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.serpentinegalleries.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Serpentine Galleries Favicon" class="favicon">
+                        <a href="https://www.serpentinegalleries.org/" target="_blank">Serpentine Galleries</a>
+                    </p>
+                    <p class="gallery-address">Kensington Gardens, London W2 3XA</p>
+                    <h3><a href="https://www.serpentinegalleries.org/whats-on/giuseppe-penone-thoughts-in-the-roots/" target="_blank">Giuseppe Penone: Thoughts in the Roots</a></h3>
+                </div>
                 <p class="summary">This exhibition brings together works from 1969 to the present, illustrating Giuseppe Penone's enduring fascination with the interplay between organic and artistic processes. A leading figure in Arte Povera, Penone experiments with a wide range of natural materials to reveal nature's hidden structures, rhythms, and gestures. [22]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 3 April - 7 September 2025</p>
                     <p><strong>Cost:</strong> Not specified [21]</p>
@@ -268,9 +392,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://southbank.london/whats-on/yoshitomo-nara" target="_blank">Yoshitomo Nara</a></h3>
-                <p class="gallery-name"><img src="https://www.southbankcentre.co.uk/favicon.ico" alt="Hayward Gallery Favicon" class="favicon"><a href="https://www.southbankcentre.co.uk/whats-on/hayward-gallery" target="_blank">Hayward Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.southbankcentre.co.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Hayward Gallery Favicon" class="favicon">
+                        <a href="https://www.southbankcentre.co.uk/whats-on/hayward-gallery" target="_blank">Hayward Gallery</a>
+                    </p>
+                    <p class="gallery-address">Southbank Centre, Belvedere Rd, London SE1 8XX</p>
+                    <h3><a href="https://southbank.london/whats-on/yoshitomo-nara" target="_blank">Yoshitomo Nara</a></h3>
+                </div>
                 <p class="summary">This major retrospective is the first UK solo exhibition in a public art institution for Japanese artist Yoshitomo Nara, spanning four decades of his emotionally charged paintings, drawings, and sculptures. Known for his striking images of child-like figures, his work explores themes of isolation, resistance, and nostalgia, influenced by music and popular culture. [23, 24]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 10 June - 31 August 2025</p>
                     <p><strong>Cost:</strong> £20 (Concessions available, Free for Southbank Centre Members)</p>
@@ -279,9 +410,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.southbankcentre.co.uk/whats-on/ali-ahadi-and-ghazaleh-avarzamani-freudian-typo/" target="_blank">Ghazaleh Avarzamani and Ali Ahadi: Freudian Typo</a></h3>
-                <p class="gallery-name"><img src="https://www.southbankcentre.co.uk/favicon.ico" alt="Hayward Gallery Favicon" class="favicon"><a href="https://www.southbankcentre.co.uk/whats-on/hayward-gallery" target="_blank">Hayward Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.southbankcentre.co.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Hayward Gallery Favicon" class="favicon">
+                        <a href="https://www.southbankcentre.co.uk/whats-on/ali-ahadi-and-ghazaleh-avarzamani-freudian-typo/" target="_blank">Hayward Gallery</a>
+                    </p>
+                    <p class="gallery-address">Southbank Centre, Belvedere Rd, London SE1 8XX</p>
+                    <h3><a href="https://www.southbankcentre.co.uk/whats-on/ali-ahadi-and-ghazaleh-avarzamani-freudian-typo/" target="_blank">Ghazaleh Avarzamani and Ali Ahadi: Freudian Typo</a></h3>
+                </div>
                 <p class="summary">This multi-layered exhibition features new work collectively created by two Iranian-Canadian artists, including image-based works, sculpture, video, and found objects. Punning and playful, it invites visitors to consider how language, entangled with corporate finance, underpins the globally precarious state of land, bodies, and truth, drawing on English nursery rhymes. [26, 27]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 10 June - 31 August 2025</p>
                     <p><strong>Cost:</strong> Free [28, 26]</p>
@@ -290,9 +428,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.barbican.org.uk/whats-on/2025/event/feel-the-sound" target="_blank">Feel the Sound</a></h3>
-                <p class="gallery-name"><img src="https://www.barbican.org.uk/favicon.ico" alt="Barbican Art Gallery Favicon" class="favicon"><a href="https://www.barbican.org.uk/whats-on/art-design" target="_blank">Barbican Art Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.barbican.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Barbican Art Gallery Favicon" class="favicon">
+                        <a href="https://www.barbican.org.uk/whats-on/art-design" target="_blank">Barbican Art Gallery</a>
+                    </p>
+                    <p class="gallery-address">Silk St, London EC2Y 8DS</p>
+                    <h3><a href="https://www.barbican.org.uk/whats-on/2025/event/feel-the-sound" target="_blank">Feel the Sound</a></h3>
+                </div>
                 <p class="summary">This bold new multi-sensory exhibition invites visitors to explore how sound shapes emotions, memories, and physical experiences beyond hearing alone. Through cutting-edge installations and interactive technology, it challenges us to reconsider how we listen, engaging senses beyond hearing. [29, 30]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 22 May - 31 August 2025</p>
                     <p><strong>Cost:</strong> £20 (Various concessions, £12 Young Barbican, Free for Members) [29]</p>
@@ -301,9 +446,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.artrabbit.com/events/huma-bhabha-encounters-giacometti" target="_blank">Encounters: Giacometti x Huma Bhabha</a></h3>
-                <p class="gallery-name"><img src="https://www.barbican.org.uk/favicon.ico" alt="Barbican Art Gallery Favicon" class="favicon"><a href="https://www.barbican.org.uk/whats-on/art-design" target="_blank">Barbican Art Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.barbican.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Barbican Art Gallery Favicon" class="favicon">
+                        <a href="https://www.barbican.org.uk/whats-on/art-design" target="_blank">Barbican Art Gallery</a>
+                    </p>
+                    <p class="gallery-address">Silk St, London EC2Y 8DS</p>
+                    <h3><a href="https://www.artrabbit.com/events/huma-bhabha-encounters-giacometti" target="_blank">Encounters: Giacometti x Huma Bhabha</a></h3>
+                </div>
                 <p class="summary">This exhibition positions historic sculptures by Alberto Giacometti with new works by contemporary artist Huma Bhabha in an intimate new space. It explores the fragmented body and the aftermath of war and psychological scars, with Bhabha's hybrid figures in dialogue with Giacometti's elongated forms. [31, 32]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 8 May - 10 August 2025</p>
                     <p><strong>Cost:</strong> £8 [33, 31]</p>
@@ -312,9 +464,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.whitecube.com/gallery-exhibitions/richard-hunt-bermondsey-2025" target="_blank">Richard Hunt: Metamorphosis – A Retrospective</a></h3>
-                <p class="gallery-name"><img src="https://www.whitecube.com/favicon.ico" alt="White Cube Bermondsey Favicon" class="favicon"><a href="https://www.whitecube.com/exhibitions/london" target="_blank">White Cube Bermondsey</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.whitecube.com/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="White Cube Bermondsey Favicon" class="favicon">
+                        <a href="https://www.whitecube.com/exhibitions/london" target="_blank">White Cube Bermondsey</a>
+                    </p>
+                    <p class="gallery-address">144-152 Bermondsey St, London SE1 3TQ</p>
+                    <h3><a href="https://www.whitecube.com/gallery-exhibitions/richard-hunt-bermondsey-2025" target="_blank">Richard Hunt: Metamorphosis – A Retrospective</a></h3>
+                </div>
                 <p class="summary">This marks the first posthumous retrospective and major European exhibition dedicated to the late American sculptor Richard Hunt. Spanning over six decades, it traces the evolution of his prolific career through more than 30 major works, showcasing his innovative command of metal and exploration of form, history, and lived experience. [34]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 25 April - 29 June 2025</p>
                     <p><strong>Cost:</strong> Free (Generally, but check for special events) [35, 36]</p>
@@ -323,9 +482,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.whitecube.com/gallery-exhibitions/anselm-kiefer-masons-yard-2025" target="_blank">Anselm Kiefer</a></h3>
-                <p class="gallery-name"><img src="https://www.whitecube.com/favicon.ico" alt="White Cube Mason's Yard Favicon" class="favicon"><a href="https://www.whitecube.com/exhibitions/london" target="_blank">White Cube Mason's Yard</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.whitecube.com/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="White Cube Mason's Yard Favicon" class="favicon">
+                        <a href="https://www.whitecube.com/exhibitions/london" target="_blank">White Cube Mason's Yard</a>
+                    </p>
+                    <p class="gallery-address">25-26 Mason's Yard, St. James's, London SW1Y 6BU</p>
+                    <h3><a href="https://www.whitecube.com/gallery-exhibitions/anselm-kiefer-masons-yard-2025" target="_blank">Anselm Kiefer</a></h3>
+                </div>
                 <p class="summary">This solo exhibition features paintings, sculpture, and photography by Anselm Kiefer, whose work navigates the immensity of history and visions of humanity, specifically the political inheritances of post-war Germany. Kiefer's imposing work considers the inaccessibility of meaning and the enormity of collective memory and loss through heterogeneous materials and monumental creation. [39]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 25 June - 16 August 2025</p>
                     <p><strong>Cost:</strong> Not specified [40]</p>
@@ -334,9 +500,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.galleriesnow.net/shows/connecting-thin-black-lines-1985-2025/" target="_blank">Connecting Thin Black Lines 1985 – 2025</a></h3>
-                <p class="gallery-name"><img src="https://www.ica.art/favicon.ico" alt="Institute of Contemporary Arts (ICA) Favicon" class="favicon"><a href="https://www.ica.art/" target="_blank">Institute of Contemporary Arts (ICA)</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.ica.art/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Institute of Contemporary Arts (ICA) Favicon" class="favicon">
+                        <a href="https://www.ica.art/" target="_blank">Institute of Contemporary Arts (ICA)</a>
+                    </p>
+                    <p class="gallery-address">The Mall, London SW1Y 5AH</p>
+                    <h3><a href="https://www.galleriesnow.net/shows/connecting-thin-black-lines-1985-2025/" target="_blank">Connecting Thin Black Lines 1985 – 2025</a></h3>
+                </div>
                 <p class="summary">This major group exhibition, curated by Lubaina Himid, celebrates 40 years since 'The Thin Black Line,' a groundbreaking group show of young Black and Asian women artists at the ICA in 1985. It features works by all original artists, new commissions, and a rich program of film screenings, talks, and live performances. [41, 42]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 24 June - 7 September 2025</p>
                     <p><strong>Cost:</strong> £8.75 / £5.50 concessions (Pay what you can 12-1pm daily) [41]</p>
@@ -345,9 +518,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.southlondongallery.org/exhibitions/museo-jumex-in-residence-part-1/" target="_blank">Museo Jumex in Residence (Part 1)</a></h3>
-                <p class="gallery-name"><img src="https://www.southlondongallery.org/favicon.ico" alt="South London Gallery (SLG) Favicon" class="favicon"><a href="https://www.southlondongallery.org/" target="_blank">South London Gallery (SLG)</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.southlondongallery.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="South London Gallery (SLG) Favicon" class="favicon">
+                        <a href="https://www.southlondongallery.org/" target="_blank">South London Gallery (SLG)</a>
+                    </p>
+                    <p class="gallery-address">65-67 Peckham Rd, London SE5 8UH</p>
+                    <h3><a href="https://www.southlondongallery.org/exhibitions/museo-jumex-in-residence-part-1/" target="_blank">Museo Jumex in Residence (Part 1)</a></h3>
+                </div>
                 <p class="summary">This collaboration showcases works from the international collection of Museo Jumex, Mexico City, in a group exhibition featuring installation, sculpture, video, and photography by artists from around the world. It aims to familiarize audiences with concepts and contexts informing current art practice. [44]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 21 May - 31 August 2025</p>
                     <p><strong>Cost:</strong> Free [44]</p>
@@ -356,9 +536,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.southlondongallery.org/exhibitions/leonardo-drew/" target="_blank">Leonardo Drew: Ubiquity II</a></h3>
-                <p class="gallery-name"><img src="https://www.southlondongallery.org/favicon.ico" alt="South London Gallery (SLG) Favicon" class="favicon"><a href="https://www.southlondongallery.org/" target="_blank">South London Gallery (SLG)</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.southlondongallery.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="South London Gallery (SLG) Favicon" class="favicon">
+                        <a href="https://www.southlondongallery.org/" target="_blank">South London Gallery (SLG)</a>
+                    </p>
+                    <p class="gallery-address">65-67 Peckham Rd, London SE5 8UH</p>
+                    <h3><a href="https://www.southlondongallery.org/exhibitions/leonardo-drew/" target="_blank">Leonardo Drew: Ubiquity II</a></h3>
+                </div>
                 <p class="summary">This exhibition features American artist Leonardo Drew taking over the SLG's main gallery with a new immersive sculptural installation. Known for his explosive abstract works, Drew explores the cyclical nature of life and decay by transforming and eroding materials by hand, creating pieces that play on the tension between order and chaos. [47]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 30 May - 7 September 2025</p>
                     <p><strong>Cost:</strong> Free [48]</p>
@@ -367,9 +554,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://thephotographersgallery.org.uk/whats-on/lisa-barnard-canary-and-hammer" target="_blank">Lisa Barnard: The Canary and The Hammer</a></h3>
-                <p class="gallery-name"><img src="https://thephotographersgallery.org.uk/favicon.ico" alt="The Photographers' Gallery Favicon" class="favicon"><a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://thephotographersgallery.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="The Photographers' Gallery Favicon" class="favicon">
+                        <a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a>
+                    </p>
+                    <p class="gallery-address">16-18 Ramillies St, London W1F 7LW</p>
+                    <h3><a href="https://thephotographersgallery.org.uk/whats-on/lisa-barnard-canary-and-hammer" target="_blank">Lisa Barnard: The Canary and The Hammer</a></h3>
+                </div>
                 <p class="summary">This free outdoor exhibition explores the troubled history of gold, our reverence for it, and its role in the pursuit of progress and wealth. Lisa Barnard's project, prompted by the 2008 financial crisis, brings together contrasting stories from ecological destruction and human exploitation in mining to gold's importance in medicine and technology. [49]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 8 May 2025 - 31 May 2026</p>
                     <p><strong>Cost:</strong> Free [50]</p>
@@ -378,9 +572,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://thephotographersgallery.org.uk/whats-on/alma-haser-everything-has-end-only-sausage-has-two" target="_blank">Alma Haser: Everything Has an End, Only the Sausage Has Two</a></h3>
-                <p class="gallery-name"><img src="https://thephotographersgallery.org.uk/favicon.ico" alt="The Photographers' Gallery Favicon" class="favicon"><a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://thephotographersgallery.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="The Photographers' Gallery Favicon" class="favicon">
+                        <a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a>
+                    </p>
+                    <p class="gallery-address">16-18 Ramillies St, London W1F 7LW</p>
+                    <h3><a href="https://thephotographersgallery.org.uk/whats-on/alma-haser-everything-has-end-only-sausage-has-two" target="_blank">Alma Haser: Everything Has an End, Only the Sausage Has Two</a></h3>
+                </div>
                 <p class="summary">This solo exhibition explores a playful reimagining of German idioms through sculptural images that blend humor, history, and imagination. Alma Haser transforms the quirkiness of the German language into three-dimensional pieces, playing with folds, layers, and structures that bring language to life. [52]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 25 April - 29 June 2025</p>
                     <p><strong>Cost:</strong> Free [50]</p>
@@ -389,9 +590,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://thephotographersgallery.org.uk/whats-on/deutsche-borse-photography-foundation-prize-2025" target="_blank">Deutsche Börse Photography Foundation Prize 2025</a></h3>
-                <p class="gallery-name"><img src="https://thephotographersgallery.org.uk/favicon.ico" alt="The Photographers' Gallery Favicon" class="favicon"><a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://thephotographersgallery.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="The Photographers' Gallery Favicon" class="favicon">
+                        <a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a>
+                    </p>
+                    <p class="gallery-address">16-18 Ramillies St, London W1F 7LW</p>
+                    <h3><a href="https://thephotographersgallery.org.uk/whats-on/deutsche-borse-photography-foundation-prize-2025" target="_blank">Deutsche Börse Photography Foundation Prize 2025</a></h3>
+                </div>
                 <p class="summary">This long-standing annual prize spotlights outstanding, innovative, and thought-provoking work by artists whose exhibitions or books have made a significant contribution to photography. The 2025 shortlisted projects feature documentary photography, constructed images, self-portraiture, performance, and family archives, exploring themes of migration, community, and belonging. [53, 54]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 7 March - 15 June 2025</p>
                     <p><strong>Cost:</strong> General admission £10 (Various concessions, Free for Members/Under 18s, Free Fridays after 5pm) [55]</p>
@@ -400,9 +608,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://thephotographersgallery.org.uk/whats-on/peter-mitchell-nothing-lasts-forever" target="_blank">Peter Mitchell: Nothing Lasts Forever</a></h3>
-                <p class="gallery-name"><img src="https://thephotographersgallery.org.uk/favicon.ico" alt="The Photographers' Gallery Favicon" class="favicon"><a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://thephotographersgallery.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="The Photographers' Gallery Favicon" class="favicon">
+                        <a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a>
+                    </p>
+                    <p class="gallery-address">16-18 Ramillies St, London W1F 7LW</p>
+                    <h3><a href="https://thephotographersgallery.org.uk/whats-on/peter-mitchell-nothing-lasts-forever" target="_blank">Peter Mitchell: Nothing Lasts Forever</a></h3>
+                </div>
                 <p class="summary">This retrospective features work by Peter Mitchell, regarded as one of the most important early color photographers of the 20th century. A powerful storyteller and social historian, Mitchell's photography chronicles the people and places, demolition, and development of Leeds with warmth and a unique, often off-beat vision. [54]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 7 March - 15 June 2025</p>
                     <p><strong>Cost:</strong> General admission £10 (Various concessions, Free for Members/Under 18s, Free Fridays after 5pm) [55]</p>
@@ -411,9 +626,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://thephotographersgallery.org.uk/whats-on/dennis-morris-music-life" target="_blank">Dennis Morris: Music + Life</a></h3>
-                <p class="gallery-name"><img src="https://thephotographersgallery.org.uk/favicon.ico" alt="The Photographers' Gallery Favicon" class="favicon"><a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://thephotographersgallery.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="The Photographers' Gallery Favicon" class="favicon">
+                        <a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a>
+                    </p>
+                    <p class="gallery-address">16-18 Ramillies St, London W1F 7LW</p>
+                    <h3><a href="https://thephotographersgallery.org.uk/whats-on/dennis-morris-music-life" target="_blank">Dennis Morris: Music + Life</a></h3>
+                </div>
                 <p class="summary">This exhibition celebrates the work of British-Jamaican photographer Dennis Morris, renowned for his intimate portraits of cultural icons like Bob Marley and the Sex Pistols. His images are a vivid exploration of music, identity, and social change, capturing the spirit of pivotal moments in 20th-century culture and early documentary work on Black British identity. [56]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 27 June - 28 September 2025</p>
                     <p><strong>Cost:</strong> Book tickets (General admission £10) [56]</p>
@@ -422,9 +644,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://thephotographersgallery.org.uk/whats-on/felicity-hammond-v3-model-collapse" target="_blank">Felicity Hammond: V3 Model Collapse</a></h3>
-                <p class="gallery-name"><img src="https://thephotographersgallery.org.uk/favicon.ico" alt="The Photographers' Gallery Favicon" class="favicon"><a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://thephotographersgallery.org.uk/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="The Photographers' Gallery Favicon" class="favicon">
+                        <a href="https://thephotographersgallery.org.uk/" target="_blank">The Photographers' Gallery</a>
+                    </p>
+                    <p class="gallery-address">16-18 Ramillies St, London W1F 7LW</p>
+                    <h3><a href="https://thephotographersgallery.org.uk/whats-on/felicity-hammond-v3-model-collapse" target="_blank">Felicity Hammond: V3 Model Collapse</a></h3>
+                </div>
                 <p class="summary">This exhibition explores the relationship between geological mining and data mining, and image-making and machine learning. Felicity Hammond uses AI to map how digital photographic material journeys from mineral to pixel, offering an encounter with AI hallucinations through destabilized photographic images that depict distorted perspectives and ghostly figures. [57]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 27 June - 28 September 2025</p>
                     <p><strong>Cost:</strong> Book tickets (General admission £10) [57]</p>
@@ -433,9 +662,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://camdenartcentre.org/whats-on/richard-wright" target="_blank">Richard Wright</a></h3>
-                <p class="gallery-name"><img src="https://camdenartcentre.org/favicon.ico" alt="Camden Art Centre Favicon" class="favicon"><a href="https://camdenartcentre.org/" target="_blank">Camden Art Centre</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://camdenartcentre.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Camden Art Centre Favicon" class="favicon">
+                        <a href="https://camdenartcentre.org/" target="_blank">Camden Art Centre</a>
+                    </p>
+                    <p class="gallery-address">Arkwright Rd, London NW3 6DG</p>
+                    <h3><a href="https://camdenartcentre.org/whats-on/richard-wright" target="_blank">Richard Wright</a></h3>
+                </div>
                 <p class="summary">This is Richard Wright's first solo institutional presentation in London in over two decades. The Turner Prize-winning artist is known for his site-specific wall paintings, and this exhibition includes a new monumental work, alongside pieces in glass, gold leaf, and drawings, revealing his approach to painting as a form of image-making that reveals reality. [58, 59]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> Through 22 June 2025</p>
                     <p><strong>Cost:</strong> Free [60, 61]</p>
@@ -444,9 +680,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://camdenartsprojects.com/exhibition/martin-creed-everything-is-going-to-be-alright" target="_blank">EVERYTHING IS GOING TO BE ALRIGHT (Martin Creed)</a></h3>
-                <p class="gallery-name"><img src="https://camdenartcentre.org/favicon.ico" alt="Camden Art Centre Favicon" class="favicon"><a href="https://camdenartcentre.org/" target="_blank">Camden Art Centre</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://camdenartcentre.org/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Camden Art Centre Favicon" class="favicon">
+                        <a href="https://camdenartcentre.org/" target="_blank">Camden Art Centre</a>
+                    </p>
+                    <p class="gallery-address">Arkwright Rd, London NW3 6DG</p>
+                    <h3><a href="https://camdenartsprojects.com/exhibition/martin-creed-everything-is-going-to-be-alright" target="_blank">EVERYTHING IS GOING TO BE ALRIGHT (Martin Creed)</a></h3>
+                </div>
                 <p class="summary">This exhibition presents a thoughtful exploration of comfort, vulnerability, and reassurance through the works of Martin Creed. Central pieces include the neon phrase 'Everything is going to be alright' and a room filled with balloons, embracing simplicity and openness, reminding visitors of the power in moments of comfort. [64, 65]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 9 May - 29 June 2025</p>
                     <p><strong>Cost:</strong> Free (Generally) [60, 61]</p>
@@ -455,9 +698,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.newportstreetgallery.com/exhibition/the-power-and-the-glory/" target="_blank">The Power and the Glory</a></h3>
-                <p class="gallery-name"><img src="https://www.newportstreetgallery.com/favicon.ico" alt="Newport Street Gallery Favicon" class="favicon"><a href="https://www.newportstreetgallery.com/" target="_blank">Newport Street Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.newportstreetgallery.com/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Newport Street Gallery Favicon" class="favicon">
+                        <a href="https://www.newportstreetgallery.com/" target="_blank">Newport Street Gallery</a>
+                    </p>
+                    <p class="gallery-address">Newport St, London SE11 6AJ</p>
+                    <h3><a href="https://www.newportstreetgallery.com/exhibition/the-power-and-the-glory/" target="_blank">The Power and the Glory</a></h3>
+                </div>
                 <p class="summary">This exhibition, curated by Connor Hirst, features scholars' rocks displayed alongside archive photographs documenting the atomic age. It explores the relationship between nature, technology, and humanity, highlighting humanity's destructive use of natural forces in contrast to the contemplative nature of the rocks. [66, 67]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 28 March - 31 August 2025</p>
                     <p><strong>Cost:</strong> Free [68]</p>
@@ -466,9 +716,16 @@
             </div>
 
             <div class="exhibition-card">
-                <h3><a href="https://www.newportstreetgallery.com/exhibition/raging-planet/" target="_blank">Raging Planet</a></h3>
-                <p class="gallery-name"><img src="https://www.newportstreetgallery.com/favicon.ico" alt="Newport Street Gallery Favicon" class="favicon"><a href="https://www.newportstreetgallery.com/" target="_blank">Newport Street Gallery</a></p>
+                <div class="card-header">
+                    <p class="gallery-info">
+                        <img src="https://www.newportstreetgallery.com/favicon.ico" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E';" alt="Newport Street Gallery Favicon" class="favicon">
+                        <a href="https://www.newportstreetgallery.com/" target="_blank">Newport Street Gallery</a>
+                    </p>
+                    <p class="gallery-address">Newport St, London SE11 6AJ</p>
+                    <h3><a href="https://www.newportstreetgallery.com/exhibition/raging-planet/" target="_blank">Raging Planet</a></h3>
+                </div>
                 <p class="summary">This group exhibition, curated by Connor Hirst, features works by Angela Bulloch, Roger Hiorns, Oliver Marsden, Hwang Samyong, Bosco Sodi, and Keith Tyson. It explores different ways artists engage with the natural world through paintings, sculptures, and installations, highlighting the use of texture and materiality and incorporating elements found in the earth. [71, 72]</p>
+                <span class="read-more-toggle">Read more</span>
                 <div class="details">
                     <p><strong>Dates:</strong> 28 March - 31 August 2025</p>
                     <p><strong>Cost:</strong> Free [68]</p>
@@ -478,5 +735,30 @@
 
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const summaries = document.querySelectorAll('.exhibition-card .summary');
+
+            summaries.forEach(summary => {
+                const toggle = summary.nextElementSibling; // The span with read-more-toggle
+
+                // Only add toggle if content overflows
+                if (summary.scrollHeight > summary.clientHeight) {
+                    toggle.style.display = 'block'; // Make sure toggle is visible
+                    toggle.addEventListener('click', () => {
+                        summary.classList.toggle('expanded');
+                        if (summary.classList.contains('expanded')) {
+                            toggle.textContent = 'Read less';
+                        } else {
+                            toggle.textContent = 'Read more';
+                        }
+                    });
+                } else {
+                    toggle.style.display = 'none'; // Hide toggle if content fits
+                }
+            });
+        });
+    </script>
 </body>
 </html>
